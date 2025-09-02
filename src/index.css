@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Set Roboto Condensed as default font for the entire project */
+body {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+/* Custom font families */
+.font-outfit {
+  font-family: "Outfit", sans-serif;
+}
+
+.font-roboto-condensed {
+  font-family: "Roboto Condensed", sans-serif;
+}
