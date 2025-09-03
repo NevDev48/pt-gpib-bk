@@ -1,5 +1,6 @@
 import Hero from "../components/Hero";
 import Service from "../components/Service";
+import Galery from "../components/Galery"
 
 export default function Home() {
   return (
@@ -13,6 +14,9 @@ export default function Home() {
       </section>
       <div className="py-10 bg-gray-100">
         <Service />
+      </div>
+      <div className="py-5">
+        <Galery />
       </div>
     </>
   );

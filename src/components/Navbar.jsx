@@ -1,9 +1,11 @@
 import logo from "../assets/pt.png";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   // Handle scroll effect
   useEffect(() => {
@@ -16,40 +18,79 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Check if current path is active
+  const isActive = (path) => {
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname.startsWith(path)) return true;
+    return false;
+  };
+
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-lg p-2`}>
-      <div className="container mx-2">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-lg px-4 py-2`}>
+      <div className="container mx-auto">
         <div className="flex justify-between items-center">
           {/* Logo and Title */}
-          <div className="flex items-center space-x-4">
-            <img src={logo} alt="PT GPIB" className="h-11 w-auto" />
-            <p className="text-gray-800 font-bold text-xl">
-              PT GPIB Immanuel Bung Karno
+          <Link to="/" className="flex items-center space-x-2 md:space-x-4">
+            <img src={logo} alt="PT GPIB" className="h-8 md:h-11 w-auto" />
+            <p className="text-gray-800 font-bold text-sm md:text-xl leading-tight">
+              <span className="block md:hidden">PT GPIB</span>
+              <span className="hidden md:block">PT GPIB Immanuel Bung Karno</span>
             </p>
-          </div>
+          </Link>
           
           {/* Desktop Menu - Center */}
           <div className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            <a href="#home" className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium">
+            <Link 
+              to="/" 
+              className={`transition-colors duration-200 font-medium ${
+                isActive('/') 
+                  ? 'text-yellow-600 border-b-2 border-yellow-600' 
+                  : 'text-gray-800 hover:text-yellow-500'
+              }`}
+            >
               Home
-            </a>
-            <a href="#about" className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium">
+            </Link>
+            <Link 
+              to="/about" 
+              className={`transition-colors duration-200 font-medium ${
+                isActive('/about') 
+                  ? 'text-yellow-600 border-b-2 border-yellow-600' 
+                  : 'text-gray-800 hover:text-yellow-500'
+              }`}
+            >
               About Us
-            </a>
-            <a href="#event" className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium">
+            </Link>
+            <Link 
+              to="/event" 
+              className={`transition-colors duration-200 font-medium ${
+                isActive('/event') 
+                  ? 'text-yellow-600 border-b-2 border-yellow-600' 
+                  : 'text-gray-800 hover:text-yellow-500'
+              }`}
+            >
               Event
-            </a>
-            <a href="#contact" className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium">
+            </Link>
+            <Link 
+              to="/contact" 
+              className={`transition-colors duration-200 font-medium ${
+                isActive('/contact') 
+                  ? 'text-yellow-600 border-b-2 border-yellow-600' 
+                  : 'text-gray-800 hover:text-yellow-500'
+              }`}
+            >
               Contact Us
-            </a>
+            </Link>
           </div>
 
           {/* Right Side - Visit Us Button & Mobile Menu Toggle */}
           <div className="flex items-center space-x-4">
-            {/* Visit Us Button */}
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-3xl transition-colors duration-200 font-medium">
+            {/* Visit Us Button - Hidden on mobile */}
+            <Link 
+              to="/contact"
+              className="hidden lg:block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-3xl transition-colors duration-200 font-medium"
+            >
               Visit Us
-            </button>
+            </Link>
             
             {/* Mobile Menu Toggle */}
             <button 
@@ -71,34 +112,59 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 border-t border-gray-300">
             <div className="flex flex-col space-y-3 pt-4">
-              <a 
-                href="#home" 
-                className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium py-2"
+              <Link 
+                to="/" 
+                className={`py-2 transition-colors duration-200 font-medium ${
+                  isActive('/') 
+                    ? 'text-yellow-600 font-bold' 
+                    : 'text-gray-800 hover:text-yellow-500'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
-              </a>
-              <a 
-                href="#about" 
-                className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium py-2"
+              </Link>
+              <Link 
+                to="/about" 
+                className={`py-2 transition-colors duration-200 font-medium ${
+                  isActive('/about') 
+                    ? 'text-yellow-600 font-bold' 
+                    : 'text-gray-800 hover:text-yellow-500'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 About Us
-              </a>
-              <a 
-                href="#event" 
-                className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium py-2"
+              </Link>
+              <Link 
+                to="/event" 
+                className={`py-2 transition-colors duration-200 font-medium ${
+                  isActive('/event') 
+                    ? 'text-yellow-600 font-bold' 
+                    : 'text-gray-800 hover:text-yellow-500'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Event
-              </a>
-              <a 
-                href="#contact" 
-                className="text-gray-800 hover:text-yellow-500 transition-colors duration-200 font-medium py-2"
+              </Link>
+              <Link 
+                to="/contact" 
+                className={`py-2 transition-colors duration-200 font-medium ${
+                  isActive('/contact') 
+                    ? 'text-yellow-600 font-bold' 
+                    : 'text-gray-800 hover:text-yellow-500'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact Us
-              </a>
+              </Link>
+              
+              {/* Visit Us Button in Mobile Menu */}
+              <Link 
+                to="/contact"
+                className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-3xl transition-colors duration-200 font-medium text-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Visit Us
+              </Link>
             </div>
           </div>
         )}

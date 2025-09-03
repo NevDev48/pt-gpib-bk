@@ -6,9 +6,12 @@ export default function Service() {
   return (
     <section id="service" className="py-20 px-10 md:px-20">
       <div className="container mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold text-center mb-3">
           Service Time
         </h2>
+        <p className="text-gray-700 text-[20px] text-center mb-12">
+          Come as you are and experience the love of Christ in <br /> our welcoming community
+        </p>
         <div className="grid grid-cols-1 items-center text-center md:grid-cols-2 lg:grid-cols-3 gap-12">
           {/* Service Item 1 dengan Icon Jam */}
           <div className="bg-white p-6 rounded-lg shadow-md">
