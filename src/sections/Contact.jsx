@@ -1,3 +1,5 @@
+import SimpleMap from '../components/SimpleMap';
+
 export default function Contact() {
     return (
         <section id="contact" className="py-20 bg-white">
@@ -22,9 +24,9 @@ export default function Contact() {
                                 <div>
                                     <h4 className="font-bold text-lg mb-2">Alamat Gereja</h4>
                                     <p className="text-gray-600">
-                                        Jl. Bung Karno No. 45<br />
-                                        Jakarta Pusat 10110<br />
-                                        DKI Jakarta, Indonesia
+                                        Jl. Bung Karno No. 1<br />
+                                        Mataram Timur, Kec. Mataram<br />
+                                        Kota Mataram, Nusa Tenggara Barat 83127
                                     </p>
                                 </div>
                             </div>
@@ -210,14 +212,64 @@ export default function Contact() {
                     <h3 className="text-2xl font-bold mb-8 text-gray-800 text-center">
                         Lokasi Gereja
                     </h3>
-                    <div className="bg-gray-200 rounded-xl h-96 flex items-center justify-center">
-                        <div className="text-center text-gray-500">
-                            <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <p>Peta Google Maps akan ditampilkan di sini</p>
-                            <p className="text-sm mt-2">Jl. Bung Karno No. 45, Jakarta Pusat</p>
+                    
+                    {/* Simple Map Component */}
+                    <SimpleMap />
+                    
+                    {/* Address Info Below Map */}
+                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-6 mt-6 text-white">
+                        <div className="grid md:grid-cols-3 gap-6 text-center">
+                            <div>
+                                <h4 className="font-bold text-lg mb-2">📍 Alamat Lengkap</h4>
+                                <p className="text-sm">
+                                    Jl. Bung Karno No. 1<br />
+                                    Mataram Timur, Kec. Mataram<br />
+                                    Kota Mataram, NTB 83127
+                                </p>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-lg mb-2">🚗 Akses Transportasi</h4>
+                                <p className="text-sm">
+                                    Pusat Kota Mataram<br />
+                                    Akses mudah dari terminal<br />
+                                    Area parkir luas tersedia
+                                </p>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-lg mb-2">⏰ Jam Buka</h4>
+                                <p className="text-sm">
+                                    Senin - Jumat: 09:00 - 17:00<br />
+                                    Sabtu: 09:00 - 15:00<br />
+                                    Minggu: 07:00 - 12:00
+                                </p>
+                            </div>
+                        </div>
+                        
+                        {/* Directions Button */}
+                        <div className="text-center mt-6">
+                            <a 
+                                href="https://www.google.com/maps/dir/?api=1&destination=-8.5913906,116.1139922&travelmode=driving" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center bg-white text-yellow-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200 mr-4"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                </svg>
+                                Dapatkan Arah
+                            </a>
+                            <a 
+                                href="https://maps.app.goo.gl/1WKo4RgC5cNP5rsq8" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center bg-white/20 text-white border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-yellow-600 transition-colors duration-200"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                Share Lokasi
+                            </a>
                         </div>
                     </div>
                 </div>
