@@ -20,24 +20,12 @@ export default function About() {
                             gereja kami memiliki semangat nasionalisme yang tinggi sambil tetap setia 
                             pada panggilan Injil Kristus.
                         </p>
-                        
-                        {/* Stats */}
-                        <div className="grid grid-cols-2 gap-6 mt-8">
-                            <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                                <h4 className="text-2xl font-bold text-yellow-600">58+</h4>
-                                <p className="text-gray-600">Tahun Melayani</p>
-                            </div>
-                            <div className="text-center p-4 bg-blue-50 rounded-lg">
-                                <h4 className="text-2xl font-bold text-blue-600">500+</h4>
-                                <p className="text-gray-600">Anggota Jemaat</p>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Right Content - Image */}
                     <div className="relative">
                         <img 
-                            src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=600&h=400&fit=crop" 
+                            src="/src/assets/home.jpg" 
                             alt="Church Building" 
                             className="rounded-xl shadow-lg w-full h-96 object-cover"
                         />
