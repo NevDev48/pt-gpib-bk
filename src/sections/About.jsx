@@ -88,6 +88,62 @@ export default function About() {
                         </div>
                     </div>
                 </div>
+
+                {/* Pengurus */}
+                <div className="mt-20">
+                    <h3 className="text-2xl font-bold text-center mb-12 text-gray-800">
+                        Pengurus Pelkat PT
+                    </h3>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {/* Ketua */}
+                        <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                            <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4L13.5 7.5C13.1 8.4 12.2 9 11.2 9H8.8C7.8 9 6.9 8.4 6.5 7.5L5 4L-1 7V9H21Z"/>
+                                </svg>
+                            </div>
+                            <h4 className="font-bold text-lg mb-2 text-gray-800">Ketua</h4>
+                            <p className="text-yellow-600 font-semibold mb-1">Pdt. Dr. John Doe</p>
+                            <p className="text-gray-600 text-sm">Memimpin dan mengkoordinir seluruh kegiatan gereja</p>
+                        </div>
+
+                        {/* Wakil Ketua */}
+                        <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4L13.5 7.5C13.1 8.4 12.2 9 11.2 9H8.8C7.8 9 6.9 8.4 6.5 7.5L5 4L-1 7V9H21Z"/>
+                                </svg>
+                            </div>
+                            <h4 className="font-bold text-lg mb-2 text-gray-800">Wakil Ketua</h4>
+                            <p className="text-blue-600 font-semibold mb-1">Bpk. Michael Smith</p>
+                            <p className="text-gray-600 text-sm">Mendampingi ketua dalam menjalankan tugas</p>
+                        </div>
+
+                        {/* Sekretaris */}
+                        <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                            <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                </svg>
+                            </div>
+                            <h4 className="font-bold text-lg mb-2 text-gray-800">Sekretaris</h4>
+                            <p className="text-green-600 font-semibold mb-1">Ibu Sarah Johnson</p>
+                            <p className="text-gray-600 text-sm">Mengelola administrasi dan dokumentasi gereja</p>
+                        </div>
+
+                        {/* Bendahara */}
+                        <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                            <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.8,10.9C9.53,10.31 8.8,9.7 8.8,8.75C8.8,7.66 9.81,6.9 11.5,6.9C13.28,6.9 13.94,7.75 14,9H16.21C16.14,7.28 15.09,5.7 13,5.19V3H10V5.16C8.06,5.58 6.5,6.84 6.5,8.77C6.5,11.08 8.41,12.23 11.2,12.9C13.7,13.5 14.2,14.38 14.2,15.31C14.2,16 13.71,17.1 11.5,17.1C9.44,17.1 8.63,16.18 8.5,15H6.32C6.44,17.19 8.08,18.42 10,18.83V21H13V18.85C14.95,18.5 16.5,17.35 16.5,15.3C16.5,12.46 14.07,11.5 11.8,10.9Z"/>
+                                </svg>
+                            </div>
+                            <h4 className="font-bold text-lg mb-2 text-gray-800">Bendahara</h4>
+                            <p className="text-purple-600 font-semibold mb-1">Bpk. David Wilson</p>
+                            <p className="text-gray-600 text-sm">Mengelola keuangan dan aset gereja</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );
