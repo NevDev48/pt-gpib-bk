@@ -163,13 +163,7 @@ export default function ImageGallery() {
 
                 {/* Gallery Info */}
                 <div className="text-center mt-8">
-                    <p className="text-gray-600 text-sm">
-                        {hasGalleries ? (
-                            <>✅ Menampilkan {displayImages.length} foto dari API Laravel</>
-                        ) : (
-                            <>📂 Menggunakan {displayImages.length} foto fallback</>
-                        )}
-                    </p>
+                    
                     {error && !hasGalleries && (
                         <p className="text-orange-600 text-xs mt-1">
                             ⚠️ API Status: {error}
