@@ -1,6 +1,10 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@theme {
-  --font-family-outfit: "Outfit", sans-serif;
-  --font-family-roboto-condensed: "Roboto Condensed", sans-serif;
+@layer base {
+  :root {
+    --font-family-outfit: "Outfit", sans-serif;
+    --font-family-roboto-condensed: "Roboto Condensed", sans-serif;
+  }
 }

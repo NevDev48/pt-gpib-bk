@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
-import { galleryImages } from '../data/GaleryData';
+import { useImageGallery } from '../hooks/useImageGallery';
+import { galleryImages } from '../data/GaleryData'; // Fallback data
 
 // Import Swiper styles
 import 'swiper/css';
@@ -9,9 +10,57 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 export default function ImageGallery() {
+    const { galleries, loading, error, hasGalleries } = useImageGallery();
+
+    // Use API data if available, otherwise fallback to static data
+    const displayImages = hasGalleries ? galleries : galleryImages;
+
+    // Helper function to get full image URL
+    const getImageUrl = (imagePath) => {
+        if (imagePath?.startsWith('http')) {
+            return imagePath; // Already full URL
+        }
+        return `http://localhost:8000/storage/${imagePath}`; // Laravel storage URL
+    };
+
+    if (loading && !hasGalleries) {
+        return (
+            <section className="py-20">
+                <div className="container mx-auto px-8 md:px-16 text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto"></div>
+                    <p className="mt-4 text-gray-600">Loading Gallery...</p>
+                </div>
+            </section>
+        );
+    }
+
+    // Tampilkan error message jika API bermasalah
+    if (error && !hasGalleries) {
+        return (
+            <section className="py-20">
+                <div className="container mx-auto px-8 md:px-16 text-center">
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded max-w-2xl mx-auto">
+                        <p className="font-medium">⚠️ Tidak dapat terhubung ke API Gallery</p>
+                        <p className="text-sm mt-1">{error}</p>
+                        <p className="text-sm mt-2">💡 Pastikan Laravel backend berjalan di: <code>http://localhost:8000</code></p>
+                        <p className="text-sm mt-1">🔄 Menggunakan data fallback sementara</p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="py-20 overflow-x-hidden">
             <div className="container mx-auto px-8 md:px-16">
+                {/* Loading overlay for subsequent loads */}
+                {loading && hasGalleries && (
+                    <div className="absolute top-4 right-4 z-10">
+                        <div className="bg-white rounded-full p-2 shadow-lg">
+                            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-yellow-500"></div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Swiper Gallery dengan Coverflow Effect */}
                 <div className="relative">
@@ -21,8 +70,7 @@ export default function ImageGallery() {
                         centeredSlides={true}
                         slidesPerView={3}
                         loop={true}
-                        loopFillGroupWithBlank={true}
-                        loopAdditionalSlides={3}
+                        loopFillGroupWithBlank={false}
                         coverflowEffect={{
                             rotate: 35,
                             stretch: 0,
@@ -40,7 +88,6 @@ export default function ImageGallery() {
                             delay: 3000,
                             disableOnInteraction: false,
                             pauseOnMouseEnter: true,
-                            waitForTransition: true,
                         }}
                         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                         className="gallery-swiper"
@@ -85,25 +132,49 @@ export default function ImageGallery() {
                             },
                         }}
                     >
-                        {galleryImages.map((image) => (
-                            <SwiperSlide key={image.id} className="swiper-slide-custom">
+                        {displayImages.map((image, index) => (
+                            <SwiperSlide key={`gallery-${image.id || index}`} className="swiper-slide-custom">
                                 <div className="relative group overflow-hidden rounded-xl shadow-lg">
                                     <img
-                                        src={image.src}
-                                        alt={image.alt}
+                                        src={image.image_path ? getImageUrl(image.image_path) : image.src}
+                                        alt={image.title || image.alt}
                                         className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110"
+                                        onError={(e) => {
+                                            // Fallback to placeholder if image fails to load
+                                            e.target.src = 'https://via.placeholder.com/400x300/eab308/ffffff?text=Gallery+Image';
+                                        }}
                                     />
                                     {/* Overlay */}
-                                    <div className="absolute inset-0  transition-all duration-300 flex items-end">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-all duration-300 flex items-end">
                                         <div className="p-6 text-white transition-transform duration-300">
-                                            <h3 className="text-xl font-semibold text-shadow-2xs">{image.title}</h3>
-                                            <p className="text-sm opacity-90 mt-1 text-shadow-2xs">PT GPIB Immanuel Bung Karno</p>
+                                            <h3 className="text-xl font-semibold drop-shadow-lg">
+                                                {image.title || image.alt}
+                                            </h3>
+                                            <p className="text-sm opacity-90 mt-1 drop-shadow-lg">
+                                                PT GPIB Immanuel Bung Karno
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
+                </div>
+
+                {/* Gallery Info */}
+                <div className="text-center mt-8">
+                    <p className="text-gray-600 text-sm">
+                        {hasGalleries ? (
+                            <>✅ Menampilkan {displayImages.length} foto dari API Laravel</>
+                        ) : (
+                            <>📂 Menggunakan {displayImages.length} foto fallback</>
+                        )}
+                    </p>
+                    {error && !hasGalleries && (
+                        <p className="text-orange-600 text-xs mt-1">
+                            ⚠️ API Status: {error}
+                        </p>
+                    )}
                 </div>
             </div>
 
@@ -185,15 +256,6 @@ export default function ImageGallery() {
                 .gallery-swiper .swiper-button-prev:after {
                     font-size: 18px;
                     font-weight: bold;
-                }
-                
-                /* Smooth infinite loop transitions */
-                .gallery-swiper .swiper-wrapper {
-                    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                }
-                
-                .gallery-swiper.swiper-container-autoplay .swiper-wrapper {
-                    transition-timing-function: linear;
                 }
                 
                 @media (max-width: 768px) {
